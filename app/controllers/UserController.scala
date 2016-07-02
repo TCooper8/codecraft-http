@@ -31,11 +31,14 @@ class UserController @Inject() (cloud: ICloud) extends Controller {
     )
   }
 
-  def get(id: String) = Action.async {
-    println("Got it!")
-    val cmd = GetUser(id)
-    cloud.requestCmd("user.get", cmd, 5 seconds).mapTo[GetUserReply] map { reply =>
-      Ok(Json.toJson(reply))
+  def get(id: String) = Action.async { response =>
+    response.headers.get("Authorization") map { token =>
+      val cmd = GetUser(id, token)
+      cloud.requestCmd("user.get", cmd, 5 seconds).mapTo[GetUserReply] map { reply =>
+        Ok(Json.toJson(reply))
+      }
+    } getOrElse {
+      Future { BadRequest("Token required") }
     }
   }
 }

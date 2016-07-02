@@ -3,7 +3,7 @@ import java.time.Clock
 
 import akka.actor.ActorSystem
 import codecraft.user._
-import codecraft.music._
+import codecraft.auth._
 import codecraft.platform.amqp._
 import codecraft.platform.ICloud
 import com.typesafe.config.ConfigFactory
@@ -28,7 +28,7 @@ class Module extends AbstractModule {
       UserRoutingGroup.cmdInfo.map {
         case registry => (registry.key, registry)
       }.toMap,
-      MusicRoutingGroup.cmdInfo.map {
+      AuthRoutingGroup.cmdInfo.map {
         case registry => (registry.key, registry)
       }.toMap
     ).foldLeft(Map.empty[String, codecraft.codegen.CmdRegistry]) {
@@ -36,7 +36,7 @@ class Module extends AbstractModule {
     },
     Map(
       UserRoutingGroup.groupRouting.queueName -> UserRoutingGroup.groupRouting,
-      MusicRoutingGroup.groupRouting.queueName -> MusicRoutingGroup.groupRouting
+      AuthRoutingGroup.groupRouting.queueName -> AuthRoutingGroup.groupRouting
     )
   )
 

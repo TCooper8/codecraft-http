@@ -2,8 +2,16 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /user/:id           controllers.UserController.get(id: String)
-GET     /music/:id           controllers.MusicController.get(id: String)
+POST    /api/login              controllers.LoginController.login
+GET     /api/user/:id           controllers.UserController.get(id: String)
 
-PUT     /user               controllers.UserController.add
-PUT     /music              controllers.MusicController.add
+POST     /api/user               controllers.UserController.add
+
+# POST    /login              controllers.AuthController.login
+
+GET     /index.html         controllers.Assets.at(path="/public/html", file="main.html")
+GET     /main.css           controllers.Assets.at(path="/public/css", file="main.css")
+GET     /login.js           controllers.Assets.at(path="/public/js", file="login.js")
+
+GET     /user/index               controllers.Assets.at(path="/public/html/user", file="index.html")
+GET     /user/info          controllers.Assets.at(path="/public/html/user", file="info.html")

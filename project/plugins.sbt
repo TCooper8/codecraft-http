@@ -1,3 +1,5 @@
+addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.4.0")
+
 // The Play plugin
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.5.4")
 

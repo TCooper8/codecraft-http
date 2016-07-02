@@ -1,0 +1,16 @@
+{
+  "name": "codecraft/http",
+  "dependencies": {
+    "codecraft/pman": true,
+    "codecraft/auth-messages": true,
+    "codecraft/user-messages": true,
+    "codecraft/cloud": true
+  },
+  "publish": [
+    "npm install ./",
+    "? docker rm -f codecraft_http",
+    "? docker rmi codecraft/http",
+    "sbt clean compile docker",
+    "docker run -d -p 9000:9000 --name codecraft_http codecraft/http"
+  ]
+}
